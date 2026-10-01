@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>{% block title %}Joint Health Screening{% endblock %} · Sahayak OA</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">節</span>
+      <div class="brand-text">
+        <strong>Sahayak</strong>
+        <small>Joint Health Screening</small>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="{{ url_for('screening_page') }}" class="nav-link {% if active=='screen' %}is-active{% endif %}">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3z" fill="currentColor"/><circle cx="6" cy="18" r="1.6" fill="currentColor"/><circle cx="18" cy="18" r="1.6" fill="currentColor"/></svg>
+        New Screening
+      </a>
+      <a href="{{ url_for('history_page') }}" class="nav-link {% if active=='history' %}is-active{% endif %}">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M4 5h16M4 5v14a1 1 0 001 1h14a1 1 0 001-1V5M9 9h6M9 13h6M9 17h3" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>
+        Patient History
+      </a>
+      <a href="{{ url_for('dashboard_page') }}" class="nav-link {% if active=='dashboard' %}is-active{% endif %}">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round"/></svg>
+        Dashboard
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Prototype build</p>
+      <p class="muted">North Eastern Region · Community Health</p>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">{% block header_title %}{% endblock %}</div>
+      <div class="topbar-sub">{% block header_sub %}{% endblock %}</div>
+    </header>
+
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

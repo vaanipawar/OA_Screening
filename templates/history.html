@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Patient History{% endblock %}
+{% block header_title %}Patient screening history{% endblock %}
+{% block header_sub %}Every screening submitted from this device, searchable by name or facility.{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="toolbar">
+    <input type="text" id="search-input" placeholder="Search by patient name or facility…">
+    <select id="risk-filter">
+      <option value="All">All risk levels</option>
+      <option value="Normal">Normal</option>
+      <option value="Mild">Mild</option>
+      <option value="Moderate">Moderate</option>
+      <option value="Severe">Severe</option>
+    </select>
+  </div>
+
+  <div id="table-wrap">
+    <table class="records">
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Age / Sex</th>
+          <th>Facility</th>
+          <th>Screened on</th>
+          <th>Risk</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody id="records-body"></tbody>
+    </table>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      No screenings match this filter yet.
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3 id="modal-title" style="font-family:var(--font-display); font-size:19px;"></h3>
+        <p class="muted" id="modal-sub" style="font-size:12.5px; margin-top:3px;"></p>
+      </div>
+      <button class="modal-close" id="modal-close">&times;</button>
+    </div>
+    <div id="modal-body"></div>
+    <div style="margin-top:18px; display:flex; justify-content:flex-end;">
+      <button class="btn btn-ghost btn-sm" id="modal-delete">Delete record</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

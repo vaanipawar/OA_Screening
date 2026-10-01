@@ -1,0 +1,19 @@
+@"
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# App's own database and uploaded patient images
+oa_screening.db
+uploaded_xrays/
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+"@ | Out-File -FilePath .gitignore -Encoding utf8

@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% block title %}New Screening{% endblock %}
+{% block header_title %}New joint health screening{% endblock %}
+{% block header_sub %}Walk through the four steps below with the patient. Takes about 3 minutes.{% endblock %}
+
+{% block content %}
+<div class="two-col" id="wizard-layout">
+
+  <div>
+    <div class="card">
+      <div class="stepper" id="stepper">
+        <div class="step-dot is-active" data-step="1"><span class="num">1</span> Patient</div>
+        <div class="step-dot" data-step="2"><span class="num">2</span> Symptoms</div>
+        <div class="step-dot" data-step="3"><span class="num">3</span> Movement + X-ray</div>
+        <div class="step-dot" data-step="4"><span class="num">4</span> Result</div>
+      </div>
+
+      <form id="screening-form">
+
+        <!-- STEP 1 -->
+        <div class="wizard-panel is-active" data-panel="1">
+          <div class="field">
+            <label>Patient full name</label>
+            <input type="text" id="patient_name" placeholder="e.g. Rina Bora" required>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Age (years)</label>
+              <input type="number" id="age" min="10" max="110" placeholder="e.g. 54" required>
+            </div>
+
+            <div class="field">
+              <label>Sex</label>
+              <div class="segmented" data-field="sex">
+                <button type="button" data-value="Female" class="is-selected">Female</button>
+                <button type="button" data-value="Male">Male</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Height (cm)</label>
+              <input type="number" id="height_cm" placeholder="e.g. 160">
+            </div>
+
+            <div class="field">
+              <label>Weight (kg)</label>
+              <input type="number" id="weight_kg" placeholder="e.g. 62">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>BMI <span class="hint">auto-calculated from height &amp; weight, or enter directly</span></label>
+            <input type="number" step="0.1" id="bmi" placeholder="e.g. 24.2" required>
+          </div>
+
+          <div class="field">
+            <label>Occupation intensity</label>
+            <div class="segmented" data-field="occupation_intensity">
+              <button type="button" data-value="Sedentary" class="is-selected">Sedentary</button>
+              <button type="button" data-value="Moderate">Moderate</button>
+              <button type="button" data-value="Heavy">Heavy manual</button>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Facility / health camp</label>
+              <input type="text" id="facility" placeholder="e.g. Diphu PHC">
+            </div>
+
+            <div class="field">
+              <label>Screened by</label>
+              <input type="text" id="worker_name" placeholder="e.g. ASHA worker name">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="wizard-panel" data-panel="2">
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Family history of OA?</label>
+              <div class="segmented" data-field="family_history">
+                <button type="button" data-value="0" class="is-selected">No</button>
+                <button type="button" data-value="1">Yes</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Previous joint injury?</label>
+              <div class="segmented" data-field="previous_injury">
+                <button type="button" data-value="0" class="is-selected">No</button>
+                <button type="button" data-value="1">Yes</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Symptom duration (months) <span class="hint">0 if no symptoms yet</span></label>
+            <input type="number" id="symptom_duration_months" min="0" value="0">
+          </div>
+
+          <div class="field">
+            <label>Body temperature (°C) <span class="hint">optional</span></label>
+            <input
+              type="number"
+              step="0.1"
+              id="temperature"
+              min="30"
+              max="45"
+              placeholder="e.g. 36.8"
+            >
+          </div>
+
+          <div class="field">
+            <label>Difficulty squatting / getting up from the floor?</label>
+            <div class="segmented" data-field="squat_difficulty">
+              <button type="button" data-value="0" class="is-selected">No</button>
+              <button type="button" data-value="1">Yes</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Pain score (0 = none, 10 = worst pain)</label>
+            <div class="slider-row">
+              <input type="range" id="pain_score" min="0" max="10" value="2">
+              <span class="slider-value" id="pain_score_val">2</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Morning stiffness</label>
+            <div class="segmented" data-field="stiffness">
+              <button type="button" data-value="0" class="is-selected">None</button>
+              <button type="button" data-value="1">Mild</button>
+              <button type="button" data-value="2">Moderate</button>
+              <button type="button" data-value="3">Severe</button>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Crepitus (grinding/clicking in joint)?</label>
+              <div class="segmented" data-field="crepitus">
+                <button type="button" data-value="0" class="is-selected">No</button>
+                <button type="button" data-value="1">Yes</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Visible swelling?</label>
+              <div class="segmented" data-field="swelling">
+                <button type="button" data-value="0" class="is-selected">No</button>
+                <button type="button" data-value="1">Yes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="wizard-panel" data-panel="3">
+
+          <div class="field">
+            <label>Affected side</label>
+            <div class="segmented" data-field="affected_side">
+              <button type="button" data-value="0" class="is-selected">None</button>
+              <button type="button" data-value="1">Left</button>
+              <button type="button" data-value="2">Right</button>
+              <button type="button" data-value="3">Both</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Knee range of motion (degrees) <span class="hint">use a goniometer, or estimate — full flexion is ~135°</span></label>
+            <input type="number" id="knee_rom" min="0" max="150" placeholder="e.g. 120">
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Walking speed (m/s) <span class="hint">time a 4m walk: 4 ÷ seconds</span></label>
+              <input type="number" step="0.01" id="walking_speed" placeholder="e.g. 1.1">
+            </div>
+
+            <div class="field">
+              <label>Step duration (seconds)</label>
+              <input type="number" step="0.01" id="step_duration" placeholder="e.g. 0.7">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Gait asymmetry (0 = perfectly even, 0.3 = highly uneven) <span class="hint">watch for limping or uneven step length</span></label>
+            <div class="slider-row">
+              <input type="range" id="gait_asymmetry" min="0" max="0.3" step="0.01" value="0.02">
+              <span class="slider-value" id="gait_asymmetry_val">0.02</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Overall mobility score (0-100) <span class="hint">patient's self-rated ease of daily movement</span></label>
+            <div class="slider-row">
+              <input type="range" id="mobility_score" min="0" max="100" value="85">
+              <span class="slider-value" id="mobility_score_val">85</span>
+            </div>
+          </div>
+
+          <!-- X-RAY IMAGE UPLOAD -->
+          <div class="field">
+            <label>Knee X-ray image <span class="hint">required — analyzed by the OA detection model</span></label>
+            <input type="file" id="xray_image" accept="image/*" required>
+
+            <div id="xray_preview" style="margin-top:10px; display:none;">
+              <img id="xray_preview_img" alt="X-ray preview"
+                   style="max-width:220px; max-height:220px; border-radius:10px; border:1px solid #e3e9e6; display:block;">
+              <button type="button" id="xray_clear" class="btn btn-ghost"
+                      style="margin-top:8px; padding:6px 12px; font-size:13px;">Remove image</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 : RESULT -->
+        <div class="wizard-panel" data-panel="4">
+
+          <div id="result-loading" style="display:none; padding: 40px 0; text-align:center; color:var(--ink-soft);">
+            Running screening model…
+          </div>
+
+          <div id="result-content" style="display:none;"></div>
+        </div>
+
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-ghost" id="btn-back">Back</button>
+
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-ghost" id="btn-reset" style="display:none;">Start new screening</button>
+            <button type="button" class="btn btn-primary" id="btn-next">Continue</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/screening.js') }}"></script>
+{% endblock %}
